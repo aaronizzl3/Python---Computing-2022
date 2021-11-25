@@ -1,11 +1,12 @@
 import sqlite3
 from db_class import Database_Handler
 
+myDB = Database_Handler("aquarium.db")
+conn, curs = myDB.create_connection()
 
-# Select Data from Roles
+
+# Select Role Test
 def Select_Data():
-    myDB = Database_Handler("aquarium.db")
-    conn, curs = myDB.create_connection()
     query = "SELECT * FROM tblRole"
     curs.execute(query)
     results = curs.fetchall()
@@ -14,4 +15,13 @@ def Select_Data():
         print(x)
 
 
+# Delete Test
+def Delete_Data(id):
+    query = '''DELETE FROM tblRole WHERE id=?'''
+    data = [id]
+    curs.execute(query, data)
+    conn.commit()
+
+
+# Run Tests
 Select_Data()

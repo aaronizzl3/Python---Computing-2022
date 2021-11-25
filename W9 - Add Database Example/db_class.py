@@ -82,11 +82,18 @@ class Database_Handler:
         for x in result:
             print(x)
 
-
     def update_role(self):
         pass
 
-    def delete_role(self):
-        pass
+    def delete_role(self, connection, cursor, id):
+        query = '''DELETE FROM tblRole WHERE id=?'''
+        data = [id]
+
+        try:
+            cursor.execute(query, data)
+            connection.commit()
+            print("Data deleted.")
+        except sqlite3.Error as error:
+            print(f"Error: {error}")
 
 
