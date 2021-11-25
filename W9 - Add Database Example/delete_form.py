@@ -31,11 +31,13 @@ def run_delete():
     lbl_role = ttk.Label(root, text="Enter Role ID:")
     ent_role = ttk.Entry(root, textvariable=role)
     btn_delete = ttk.Button(root, text="Delete", command=lambda: delete_role(role.get()))
+    btn_return = ttk.Button(root, text="Menu", command=lambda: menu_window())
 
     # Pack
     lbl_role.pack(side="left", padx=(10, 10))
     ent_role.pack(side="left", padx=(0, 10))
     btn_delete.pack(side="left")
+    btn_return.pack(side="left")
 
     # Run
     root.mainloop()
