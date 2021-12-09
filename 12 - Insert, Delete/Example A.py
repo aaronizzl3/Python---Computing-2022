@@ -31,6 +31,9 @@ class Application(tk.Frame):
         self.delete_button = tk.Button(self.root, text="Delete", command=self.remove_data)
         self.delete_button.grid(row=2, column=2, stick=tk.W)
 
+        self.update_button = tk.Button(self.root, text="Update", command=self.update_data)
+        self.update_button.grid(row=2, column=3, stick=tk.W)
+
         self.exit_button = tk.Button(self.root, text="Exit", command=self.root.quit)
         self.exit_button.grid(row=0, column=3)
 
@@ -57,10 +60,21 @@ class Application(tk.Frame):
 
     def insert_data(self):
         self.treeview.insert('', 'end', iid=self.iid, text="Item_" + str(self.id),
-                             values=("Name: " + self.name_entry.get(),
+                             values=(self.name_entry.get(),
                                      self.idnumber_entry.get()))
         self.iid = self.iid + 1
         self.id = self.id + 1
+
+    def update_data(self):
+        curItem = self.tree.focus()
+        values = self.tree.item(curItem, 'values')
+        v1 = input("Enter name: ")
+        v2 = input("Enter ID: ")
+        values = (v1, v2)
+        self.tree.delete(curItem)
+        self.treeview.insert('', 'end', iid=curItem, text="Item_" + str(self.id),
+                             values=(values))
+
 
     def remove_data(self):
         curItem = self.tree.focus()
